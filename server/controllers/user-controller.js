@@ -30,7 +30,14 @@ class UserController {
 
     async logout(req, res, next) {
         try{
+            const {refreshToken} = req.cookies;
+            if (!refreshToken) {
 
+                return next(ApiError.BadRequest('Refresh token is missing'));
+            }
+            await userService.logout(refreshToken);
+            res.clearCookie('refreshToken');
+            return res.json({ message: 'Logout successful' });
         }catch (e) {
             next(e);
         }
