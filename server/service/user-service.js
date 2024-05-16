@@ -14,7 +14,7 @@ class UserService {
         const hashPassword = await bcrypt.hash(password, 3);
         const activationLink = uuid.v4();
         const user = await UserModel.create({email, password: hashPassword, activationLink: activationLink});
-        await mailService.sendActivationMail(email, activationLink);
+        await mailService.sendActivationMail(email, `http://localhost:5000/api/activate/${activationLink}`);
 
         const userDto = new UserDto(user);
         const tokens = tokenService.generateToken({...userDto});
@@ -23,6 +23,17 @@ class UserService {
         return {
             ...tokens,
             user: userDto
+        }
+    }
+
+    async activate(activationLink){
+        const user = await UserModel.findOne({where: {activationLink: activationLink}}); {
+
+            if(!user){
+                throw new Error('Ошбика активации')
+            }
+            user.isActivated = true;
+            await user.save();
         }
     }
 
