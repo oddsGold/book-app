@@ -38,6 +38,26 @@ class UserService {
         }
     }
 
+    async login(email, password) {
+        const user = await UserModel.findOne({ where: { email: email } });
+        if(!user) {
+            throw ApiError.BadRequest('Пользователь с таким email не был найден');
+        }
+        const isPassEquals = await bcrypt.compare(password, user.password); //сравнение паролей (который ввели с тем который в БД)
+        if(!isPassEquals) {
+            throw ApiError.BadRequest('Неверный пароль');
+        }
+        const userDto = new UserDto(user);
+        const tokens = tokenService.generateToken({...userDto});
+
+        await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
+        return {
+            ...tokens,
+            user: userDto
+        }
+    }
+
 
 }
 
