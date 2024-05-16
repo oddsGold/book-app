@@ -4,6 +4,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mysql = require('mysql');
 const router = require('./router/index');
+const errorMiddleware = require('./middlewares/error-middlewares');
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 app.use('/api', router);
+app.use(errorMiddleware); //обработчик ошибок должен подключаться последним
 const start = async () => {
     try {
 
