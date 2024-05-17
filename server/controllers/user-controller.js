@@ -8,8 +8,8 @@ class UserController {
             if(!errors.isEmpty()) {
                 return next(ApiError.BadRequest('Validation error', errors.array()))
             }
-            const {email, password} = req.body;
-            const userData = await userService.registration(email, password);
+            const {name, email, password} = req.body;
+            const userData = await userService.registration(name, email, password);
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
             return res.json(userData);
         }catch (e) {
@@ -32,7 +32,6 @@ class UserController {
         try{
             const {refreshToken} = req.cookies;
             if (!refreshToken) {
-
                 return next(ApiError.BadRequest('Refresh token is missing'));
             }
             await userService.logout(refreshToken);
@@ -66,7 +65,6 @@ class UserController {
 
     async getUsers(req, res, next) {
         try{
-            console.log('Done')
             const users = await userService.getAllUsers();
             return res.json(users);
         }catch (e) {
