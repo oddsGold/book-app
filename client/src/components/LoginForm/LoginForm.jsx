@@ -2,13 +2,12 @@ import {useDispatch} from 'react-redux';
 import {login} from '../../redux/auth/operations';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
-import css from './LoginForm.module.css';
 
 export const LoginForm = () => {
     const dispatch = useDispatch();
 
     return (
-        <div>
+        <>
             <Formik
                 initialValues={{email: '', password: ''}}
                 validationSchema={Yup.object({
@@ -23,21 +22,19 @@ export const LoginForm = () => {
                     }))
                 }}
             >
-                <Form className={css.form}>
-                    <div>
-                        <label className={css.label} htmlFor="email">Email</label>
-                        <Field type="email" name="email" id="email"/>
-                        <ErrorMessage name="email" component="div" className={css["error-message"]}/>
-                    </div>
-                    <div>
-                        <label className={css.label} htmlFor="password">Password</label>
-                        <Field type="password" name="password" id="password"/>
-                        <ErrorMessage name="password" component="div" className={css["error-message"]}/>
-                    </div>
+                <Form>
+                    <>
+                        <Field type="email" name="email" id="email" placeholder="Email"/>
+                        <ErrorMessage name="email" className="error-message" component="div" />
+                    </>
+                    <>
+                        <Field type="password" name="password" id="password" placeholder="Password"/>
+                        <ErrorMessage name="password" className="error-message" component="div"/>
+                    </>
                     <button type="submit">Log In</button>
                 </Form>
             </Formik>
-        </div>
+        </>
 
     );
 };

@@ -5,7 +5,9 @@ export default function LoginPage() {
     return (
         <div>
             <DocumentTitle>Login</DocumentTitle>
-            <LoginForm />
+            <div className="form-container sign-in-container">
+                <LoginForm />
+            </div>
         </div>
     );
 }

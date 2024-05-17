@@ -2,13 +2,12 @@ import { useDispatch } from 'react-redux';
 import {register} from '../../redux/auth/operations';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import css from './RegisterForm.module.css';
 
 export const RegisterForm = () => {
     const dispatch = useDispatch();
 
     return (
-        <div>
+        <>
             <Formik
                 initialValues={{name: '', email: '', password: ''}}
                 validationSchema={Yup.object({
@@ -25,25 +24,22 @@ export const RegisterForm = () => {
                     }))
                 }}
             >
-                <Form className={css.form}>
-                    <div>
-                        <label className={css.label} htmlFor="name">Username</label>
-                        <Field type="name" name="name" id="name"/>
-                        <ErrorMessage name="name" component="div" className={css["error-message"]}/>
-                    </div>
-                    <div>
-                        <label className={css.label} htmlFor="email">Email</label>
-                        <Field type="email" name="email" id="email"/>
-                        <ErrorMessage name="email" component="div" className={css["error-message"]}/>
-                    </div>
-                    <div>
-                        <label className={css.label} htmlFor="password">Password</label>
-                        <Field type="password" name="password" id="password"/>
-                        <ErrorMessage name="password" component="div" className={css["error-message"]}/>
-                    </div>
+                <Form>
+                    <>
+                        <Field type="name" name="name" id="name" placeholder="Username" />
+                        <ErrorMessage name="name" className="error-message" component="div"/>
+                    </>
+                    <>
+                        <Field type="email" name="email" id="email" placeholder="Email" />
+                        <ErrorMessage name="email" className="error-message" component="div"/>
+                    </>
+                    <>
+                        <Field type="password" name="password" id="password" placeholder="Password"/>
+                        <ErrorMessage name="password" className="error-message" component="div"/>
+                    </>
                     <button type="submit">Register</button>
                 </Form>
             </Formik>
-        </div>
+        </>
     );
 };

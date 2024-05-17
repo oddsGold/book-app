@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { updateContact } from "../../redux/contacts/operations.js";
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
-import css from "../LoginForm/LoginForm.module.css";
 
 const EditContactForm = ({ id, name, number, onCancel }) => {
     const dispatch = useDispatch();
@@ -30,11 +29,11 @@ const EditContactForm = ({ id, name, number, onCancel }) => {
                 <Form>
                     <div>
                         <Field type="name" name="name" id="name"/>
-                        <ErrorMessage name="name" component="div" className={css["error-message"]}/>
+                        <ErrorMessage name="name" component="div"/>
                     </div>
                     <div>
                         <Field type="number" name="number" id="number"/>
-                        <ErrorMessage name="number" component="div" className={css["error-message"]}/>
+                        <ErrorMessage name="number" component="div"/>
                     </div>
 
                     <button type="submit">Save</button>
