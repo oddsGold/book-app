@@ -1,0 +1,25 @@
+.form {
+    width: 100%;
+    max-width: 580px;
+    margin: 0 auto;
+}
+
+.form input {
+    width: 100%;
+    height: 30px;
+    padding: 0 5px;
+    background-color: transparent;
+}
+
+.form > div {
+    padding: 15px 0;
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 6px;
+}
+.error-message {
+    color: #ff0000;
+}

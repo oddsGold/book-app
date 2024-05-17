@@ -1,0 +1,16 @@
+.handleSearch {
+    padding: 25px 0;
+    max-width: 320px;
+    width: 100%;
+}
+.handleSearch input {
+    width: 100%;
+    padding: 3px 10px;
+}
+.handleSearch p {
+    padding-bottom: 5px;
+}
+.res-filter-name {
+    padding: 10px 0;
+    font-weight: bold;
+}

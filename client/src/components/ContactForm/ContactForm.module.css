@@ -1,0 +1,29 @@
+.contactForm {
+    display: inline-grid;
+    border: 2px solid #000;
+    max-width: 320px;
+    width: 100%;
+    padding: 15px 10px;
+}
+.form > div {
+    padding-bottom: 10px;
+}
+.form label{
+    display: grid;
+    padding-bottom: 3px;
+    font-weight: bold;
+}
+.form input {
+    width: 100%;
+    box-sizing: border-box;
+}
+.error-message {
+    color: red;
+    padding: 3px 0 10px 0;
+}
+.form button {
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 5px 10px;
+    text-align: center;
+}
