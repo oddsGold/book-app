@@ -1,4 +1,5 @@
-const UserModel = require('../models/user-model')
+const UserModel = require('../models/user-model');
+const TokenModel = require('../models/token-model');
 const e = require("express");
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
@@ -89,8 +90,6 @@ class UserService {
         const users = await UserModel.findAll();
         return users;
     }
-
-
 }
 
 module.exports = new UserService();
