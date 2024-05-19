@@ -12,6 +12,7 @@ const authSlice = createSlice({
         token: null,
         isLoggedIn: false,
         isRefreshing: false,
+        isInitialized: false,
     },
     extraReducers: (builder) => {
         builder
@@ -42,6 +43,16 @@ const authSlice = createSlice({
             .addCase(refreshUser.rejected, (state) => {
                 state.isRefreshing = false;
             });
+        builder.addMatcher(
+            (action) => {
+                return action.type.startsWith('auth/');
+            },
+            (state) => {
+                // При любом действии в слайсе авторизации (например, когда диспатчится любое действие из этого слайса),
+                // мы устанавливаем флаг isInitialized в true, чтобы показать, что состояние авторизации было инициализировано
+                state.isInitialized = true;
+            }
+        );
     },
 });
 
