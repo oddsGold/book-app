@@ -17,7 +17,14 @@ const connection = mysql.createConnection({
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+// app.use(cors());
+const corsOptions ={
+    origin:'http://localhost:5173',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 200,
+}
+app.use(cors(corsOptions));
 app.use('/api', router);
 app.use(errorMiddleware); //обработчик ошибок должен подключаться последним
 const start = async () => {

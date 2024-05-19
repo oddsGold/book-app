@@ -1,4 +1,6 @@
 import DocumentTitle from '../../components/DocumentTitle';
+import {useSelector} from "react-redux";
+import {selectLoading} from "../../redux/contacts/selectors.js";
 export default function HomePage() {
     return (
         <div className="home-page">
