@@ -4,7 +4,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 const INSTANCE = axios.create({
     withCredentials: true,
     baseURL: "http://localhost:5000/api",
-    // timeout: 2500,
+    timeout: 2500,
 });
 
 // Utility to add JWT
