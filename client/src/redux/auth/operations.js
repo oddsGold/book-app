@@ -4,11 +4,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 const INSTANCE = axios.create({
     withCredentials: true,
     baseURL: "http://localhost:5000/api",
-    timeout: 2500,
+    // timeout: 2500,
 });
 
 // Utility to add JWT
 const setAuthHeader = (token) => {
+    console.log(token)
     INSTANCE.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
@@ -20,7 +21,6 @@ const clearAuthHeader = () => {
 export const register = createAsyncThunk(
     'auth/register',
     async (credentials, thunkAPI) => {
-        console.log(credentials);
         try {
             const res = await INSTANCE.post('/registration', credentials);
             // After successful registration, add the token to the HTTP header
@@ -59,6 +59,14 @@ export const logOut = createAsyncThunk('auth/logout', async (_, {rejectWithValue
 export const refreshUser = createAsyncThunk(
     'auth/refresh',
     async (_, thunkAPI) => {
+        const state = thunkAPI.getState();
+        const persistedToken = state.auth.token;
+
+        if (persistedToken === null) {
+            // If there is no token, exit without performing any request
+            return thunkAPI.rejectWithValue('Unable to fetch user');
+        }
+
         try {
             const res = await INSTANCE.get('/refresh');
             return res.data;

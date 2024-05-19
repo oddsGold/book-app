@@ -17,7 +17,9 @@ export const Layout = ({children}) => {
                 <div className="layout">
                     <ToastContainer />
                     <AppBar />
-                    <Suspense fallback={null}>{children}</Suspense>
+                    <div className="layout-children">
+                        <Suspense fallback={null}>{children}</Suspense>
+                    </div>
                 </div>
             )}
         </>

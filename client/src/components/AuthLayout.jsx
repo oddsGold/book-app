@@ -3,6 +3,7 @@ import {RegisterForm} from "./RegisterForm/RegisterForm.jsx";
 import {LoginForm} from "./LoginForm/LoginForm.jsx";
 import {useSelector} from "react-redux";
 import {selectIsRefreshing} from "../redux/auth/selectors.js";
+import {Loading} from "./LoadingBar/Loading.jsx";
 
 export const AuthLayout = () => {
     const [isSignUpActive, setIsSignUpActive] = useState(false);
@@ -18,8 +19,8 @@ export const AuthLayout = () => {
 
     return (
         <>
-            {!isRefreshing ? (
-                    <b>Request in progress...</b>
+            {isRefreshing ? (
+                <Loading />
                 ) : (
                 <div className="auth-layout">
                     <div id="container" className={isSignUpActive ? "container right-panel-active" : "container"}>
