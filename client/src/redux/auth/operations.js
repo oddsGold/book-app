@@ -9,7 +9,6 @@ const INSTANCE = axios.create({
 
 // Utility to add JWT
 const setAuthHeader = (token) => {
-    console.log(token)
     INSTANCE.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
@@ -68,6 +67,7 @@ export const refreshUser = createAsyncThunk(
         }
 
         try {
+            setAuthHeader(persistedToken);
             const res = await INSTANCE.get('/refresh');
             return res.data;
         }catch (error){

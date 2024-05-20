@@ -1,4 +1,5 @@
 import {configureStore} from "@reduxjs/toolkit";
+import booksReducer from "../redux/books/slice.js";
 import contactsReducer from "../redux/contacts/slice.js";
 import filtersReducer from "../redux/filters/slice.js";
 import authReducer from "../redux/auth/slice.js";
@@ -23,6 +24,7 @@ const authPersistConfig = {
 export const store = configureStore({
     reducer: {
         auth: persistReducer(authPersistConfig, authReducer),
+        books: booksReducer,
         contacts: contactsReducer,
         filters: filtersReducer
     },
